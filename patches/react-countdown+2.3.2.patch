@@ -1,0 +1,26 @@
+diff --git a/node_modules/react-countdown/dist/index.es.js b/node_modules/react-countdown/dist/index.es.js
+index 4785f00..8e92266 100644
+--- a/node_modules/react-countdown/dist/index.es.js
++++ b/node_modules/react-countdown/dist/index.es.js
+@@ -562,7 +562,7 @@ var Countdown$1 = function (_React$Component) {
+           seconds = _renderProps$formatte.seconds;
+       return createElement("span", {
+         className: className
+-      }, renderProps.total < 0 ? '-' : '', days, days ? ':' : '', hours, ":", minutes, ":", seconds);
++      }, renderProps.total < 0 ? '-' : '', minutes, ":", seconds);
+     }
+   }]);
+ 
+diff --git a/node_modules/react-countdown/dist/index.js b/node_modules/react-countdown/dist/index.js
+index 8f94253..aa55aaa 100644
+--- a/node_modules/react-countdown/dist/index.js
++++ b/node_modules/react-countdown/dist/index.js
+@@ -566,7 +566,7 @@ var Countdown$1 = function (_React$Component) {
+           seconds = _renderProps$formatte.seconds;
+       return React.createElement("span", {
+         className: className
+-      }, renderProps.total < 0 ? '-' : '', days, days ? ':' : '', hours, ":", minutes, ":", seconds);
++      }, renderProps.total < 0 ? '-' : '', minutes, ":", seconds);
+     }
+   }]);
+ 

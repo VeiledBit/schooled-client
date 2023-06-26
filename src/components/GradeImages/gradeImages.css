@@ -1,0 +1,20 @@
+.canvasGrade {
+  width: 40%;
+  height: 100%;
+}
+
+.gradesContainerNew {
+  position: absolute;
+  top: 67%;
+  display: flex;
+  width: 5vw;
+  height: 3.3vh;
+}
+
+.canvasGrade1 {
+  margin-right: -6px;
+}
+
+.canvasGrade2 {
+  margin-right: -6px;
+}

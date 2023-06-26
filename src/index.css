@@ -1,0 +1,39 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+@font-face {
+  font-family: nimbus-sans;
+  src: url(./media/NimbusSanL-Reg.otf);
+  font-display: swap;
+}
+
+body {
+  min-height: 100%;
+  font-family: nimbus-sans, "Roboto", Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.btn {
+  background-color: #ffc31f;
+  border: none;
+  letter-spacing: 0.05em;
+}
+
+.btn:focus {
+  outline: #121221 solid;
+  box-shadow: none;
+}
+
+.btn:hover {
+  background-color: #d79f03;
+}

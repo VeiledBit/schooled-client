@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "airbnb"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "quotes": "off",
+    "comma-dangle": "off",
+    "linebreak-style": ["off", "windows"],
+    "no-unused-vars": "warn",
+    "no-eval": "off",
+    "no-console": "off",
+    "camelcase": "off", // userX_gradeY, underscore increases visibility
+    "react/jsx-props-no-spreading": "off", // react-hook-form register function is conflicting when the rule enabled
+    "react/jsx-filename-extension": "off", // .jsx not allowed in .js files
+    "import/extensions": "off", // .jsx import
+    "no-nested-ternary": "off", // TODO refactor nested tertiaries
+    "object-curly-newline": "off" // TODO weird conflicting issue in App.js, investigate
+  }
+}
