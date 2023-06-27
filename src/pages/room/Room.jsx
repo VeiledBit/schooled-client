@@ -305,7 +305,7 @@ export default function Room() {
       timerRef.current.stop();
       timerRef.current.start();
       setIsTimerStarted(true);
-      setIsBtnLockInDisabled(null);
+      setIsBtnLockInDisabled(false);
       setIsBtnCanvasAnswerLarge1Disabled(true);
       setIsBtnCanvasAnswerLarge2Disabled(true);
       setIsBtnCanvasAnswerLarge3Disabled(true);
@@ -608,6 +608,7 @@ export default function Room() {
 
   const onClickLockIn = () => {
     setIsAnswerLockedIn(true);
+    setIsBtnLockInDisabled(true);
     ws.emit("answer-locked-in", roomCode, username);
   };
 
