@@ -190,8 +190,14 @@ export default function Room() {
 
   useEffect(() => {
     function handleResize() {
+      const ctx = canvasRef.current.getContext("2d");
+      const ctxCache = canvasCacheRef.current.getContext("2d");
+      const imageData = ctx.getImageData(0, 0, canvasRef.current.clientWidth,
+        canvasRef.current.clientHeight);
       setCanvasWidth(canvasRef.current.clientWidth - 2);
       setCanvasHeight(canvasRef.current.clientHeight - 2);
+      ctx.putImageData(imageData, 0, 0);
+      ctxCache.putImageData(imageData, 0, 0);
     }
 
     window.addEventListener("resize", handleResize);
