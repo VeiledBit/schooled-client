@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { Controller, useForm } from "react-hook-form";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import otkLogo from "../../media/OTK.webp";
@@ -12,7 +12,7 @@ import { baseUrl } from "../../config/url";
 import "./home.css";
 
 export default function Home() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [captchaToken, setCaptchaToken] = useState("");
   const [isRoomMasterParticipating, setIsRoomMasterParticipating] = useState(false);
   const {
@@ -34,7 +34,7 @@ export default function Home() {
         if (response.status === 200) {
           sessionStorage.setItem("roomCode", response.data.roomCode);
           sessionStorage.setItem("username", formData.username);
-          history.push("/room");
+          navigate("/room");
         }
       });
     } catch (err) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { baseUrl } from "../../config/url";
@@ -14,7 +14,7 @@ export default function JoinRoom() {
   const [isErrorUsernameTakenShown, setIsErrorUsernameTakenShown] = useState(false);
   const [isErrorRoomNotFoundShown, setIsErrorRoomNotFoundShown] = useState(false);
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -37,7 +37,7 @@ export default function JoinRoom() {
           setIsErrorRoomNotFoundShown(false);
           sessionStorage.setItem("roomCode", roomCode);
           sessionStorage.setItem("username", formData.username);
-          history.push("/room");
+          navigate("/room");
         }
       });
     } catch (err) {

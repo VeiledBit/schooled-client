@@ -2,7 +2,7 @@
 /* eslint-disable func-names */
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { useHotkeys } from "react-hotkeys-hook";
 import { SketchPicker } from "react-color";
 import Countdown from "react-countdown";
@@ -18,7 +18,7 @@ import { baseUrl, inviteUrl } from "../../config/url";
 import "./room.css";
 
 export default function Room() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [question, setQuestion] = useState("Question");
   const [answer, setAnswer] = useState("Answer");
   const [img1, setImg1] = useState(blackBoardImage);
@@ -192,8 +192,12 @@ export default function Room() {
     function handleResize() {
       const ctx = canvasRef.current.getContext("2d");
       const ctxCache = canvasCacheRef.current.getContext("2d");
-      const imageData = ctx.getImageData(0, 0, canvasRef.current.clientWidth,
-        canvasRef.current.clientHeight);
+      const imageData = ctx.getImageData(
+        0,
+        0,
+        canvasRef.current.clientWidth,
+        canvasRef.current.clientHeight
+      );
       setCanvasWidth(canvasRef.current.clientWidth - 2);
       setCanvasHeight(canvasRef.current.clientHeight - 2);
       ctx.putImageData(imageData, 0, 0);
@@ -609,7 +613,7 @@ export default function Room() {
     ws.emit("leave-room", roomCode, username);
     sessionStorage.removeItem("roomCode");
     sessionStorage.removeItem("username");
-    history.replace("/");
+    navigate("/", { replace: true });
   };
 
   const onClickLockIn = () => {

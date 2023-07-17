@@ -3,8 +3,9 @@
 /* eslint-disable no-confusing-arrow */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-wrap-multilines */
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Room from "./pages/room/Room";
 import JoinRoom from "./pages/joinRoom/JoinRoom";
@@ -12,41 +13,49 @@ import JoinRoom from "./pages/joinRoom/JoinRoom";
 function App() {
   return (
     <Router>
-      <Switch>
-        <PrivateRouteLoggedIn path="/" exact component={Home} />
-        <PrivateRoute path="/room" exact component={Room} />
-        <Route exact path="/joinRoom">
-          <JoinRoom />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route
+          path="/"
+          exact
+          element={
+            <PrivateRouteLoggedIn>
+              <Home />
+            </PrivateRouteLoggedIn>
+          }
+        />
+        <Route
+          path="/room"
+          exact
+          element={
+            <PrivateRoute>
+              <Room />
+            </PrivateRoute>
+          }
+        />
+        <Route exact path="/joinRoom" element={<JoinRoom />} />
+      </Routes>
     </Router>
   );
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      sessionStorage.getItem("roomCode") ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to={{ pathname: "/" }} />
-      )
-    }
-  />
-);
+function PrivateRoute({ children }) {
+  const roomCode = sessionStorage.getItem("roomCode");
 
-const PrivateRouteLoggedIn = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      !sessionStorage.getItem("roomCode") ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to={{ pathname: "/room" }} />
-      )
-    }
-  />
-);
+  if (roomCode === null) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
+
+function PrivateRouteLoggedIn({ children }) {
+  const roomCode = sessionStorage.getItem("roomCode");
+
+  if (roomCode !== null) {
+    return <Navigate to="/room" replace />;
+  }
+
+  return children;
+}
 
 export default App;
