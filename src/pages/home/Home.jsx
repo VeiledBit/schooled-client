@@ -2,10 +2,13 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useNavigate } from "react-router";
 import { Controller, useForm } from "react-hook-form";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import otkLogo from "../../media/OTK.webp";
 import backgroundVideo from "../../media/background.mp4";
 import { baseUrl } from "../../config/url";
@@ -15,12 +18,21 @@ export default function Home() {
   const navigate = useNavigate();
   const [captchaToken, setCaptchaToken] = useState("");
   const [isRoomMasterParticipating, setIsRoomMasterParticipating] = useState(false);
+
+  const validationSchema = Yup.object().shape({
+    username: Yup.string()
+      .required("Username is required")
+      .max(30, "Maximum lenght is 20 characters"),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
   const onSubmit = async (formData) => {
     const data = {
@@ -46,19 +58,29 @@ export default function Home() {
     setCaptchaToken(token);
   };
 
+  const StyledTextField = styled(TextField)({
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+    },
+  });
+
   return (
     <div className="fullSize">
       <video className="background" src={backgroundVideo} autoPlay muted loop type="video/mp4" />
       <div className="formWrapper">
         <img className="otkLogo" src={otkLogo} alt="OTK Logo" />
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          <input
+          <StyledTextField
             className="inputUsername"
             type="text"
             name="username"
+            variant="outlined"
             placeholder="Username"
-            maxLength="20"
-            {...register("username", { required: true, maxLength: 20 })}
+            autoComplete="off"
+            inputProps={{ maxLength: 20 }}
+            {...register("username")}
+            error={!!errors.username}
+            helperText={errors.username?.message}
           />
           <FormControlLabel
             control={
@@ -84,12 +106,6 @@ export default function Home() {
             className="checkboxLabel"
             label="Are you participating?"
           />
-          {errors.username?.type === "required" && (
-            <span className="error">Username is required</span>
-          )}
-          {errors.username?.type === "maxLength" && (
-            <span className="error">Maximum length is 20</span>
-          )}
           <div className="captcha">
             <HCaptcha
               sitekey="a0e25f29-e724-4ca8-bb36-826a7c1946ac"

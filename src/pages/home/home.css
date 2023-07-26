@@ -44,8 +44,8 @@
   flex: 0 1 auto;
   align-self: center;
   width: 210px;
-  margin-bottom: 1em;
   z-index: 1;
+  min-height: 5em;
 }
 
 .checkboxLabel {
@@ -69,16 +69,4 @@
   flex: 0 1 auto;
   align-self: center;
   z-index: 1;
-}
-
-.error {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 32em;
-  margin: auto;
-  z-index: 1;
-  color: red;
-  width: fit-content;
-  user-select: none;
 }
