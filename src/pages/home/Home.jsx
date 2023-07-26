@@ -66,7 +66,14 @@ export default function Home() {
 
   return (
     <div className={styles.fullSize}>
-      <video className={styles.background} src={backgroundVideo} autoPlay muted loop type="video/mp4" />
+      <video
+        className={styles.background}
+        src={backgroundVideo}
+        autoPlay
+        muted
+        loop
+        type="video/mp4"
+      />
       <div className={styles.formWrapper}>
         <img className={styles.otkLogo} src={otkLogo} alt="OTK Logo" />
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -106,12 +113,16 @@ export default function Home() {
             className={styles.checkboxLabel}
             label="Are you participating?"
           />
-          <div className={styles.captcha}>
-            <HCaptcha
-              sitekey="a0e25f29-e724-4ca8-bb36-826a7c1946ac"
-              onVerify={(token) => handleCaptcha(token)}
-            />
-          </div>
+          {process.env.NODE_ENV === "development" ? (
+            <></>
+          ) : (
+            <div className={styles.captcha}>
+              <HCaptcha
+                sitekey={process.env.REACT_APP_HCAPTCHA_SITE_KEY}
+                onVerify={(token) => handleCaptcha(token)}
+              />
+            </div>
+          )}
           <button className={`btn ${styles.btnCreate}`} type="submit">
             CREATE
           </button>
