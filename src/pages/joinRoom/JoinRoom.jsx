@@ -7,6 +7,8 @@ import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import { baseUrl } from "../../config/url";
 import otkLogo from "../../media/OTK.webp";
 import backgroundVideo from "../../media/background.mp4";
@@ -15,10 +17,10 @@ import styles from "./JoinRoom.module.css";
 const qs = require("qs");
 
 export default function JoinRoom() {
-  const [isErrorUsernameTakenShown, setIsErrorUsernameTakenShown] = useState(false);
-  const [isErrorRoomNotFoundShown, setIsErrorRoomNotFoundShown] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const [isSnackbarErrorShowed, setIsSnackbarErrorShowed] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const validationSchema = Yup.object().shape({
     username: Yup.string()
@@ -47,8 +49,7 @@ export default function JoinRoom() {
     try {
       await axios.post(`${baseUrl}/joinRoom`, data).then((response) => {
         if (response.status === 200) {
-          setIsErrorUsernameTakenShown(false);
-          setIsErrorRoomNotFoundShown(false);
+          setIsSnackbarErrorShowed(false);
           sessionStorage.setItem("roomCode", roomCode);
           sessionStorage.setItem("username", formData.username);
           navigate("/room");
@@ -58,10 +59,12 @@ export default function JoinRoom() {
       console.log(err);
       switch (err.response.status) {
         case 404:
-          setIsErrorRoomNotFoundShown(true);
+          setErrorMessage("Room not found");
+          setIsSnackbarErrorShowed(true);
           break;
         case 409:
-          setIsErrorUsernameTakenShown(true);
+          setErrorMessage("Username is taken");
+          setIsSnackbarErrorShowed(true);
           break;
         default:
           break;
@@ -77,7 +80,14 @@ export default function JoinRoom() {
 
   return (
     <div>
-      <video className={styles.background} src={backgroundVideo} autoPlay muted loop type="video/mp4" />
+      <video
+        className={styles.background}
+        src={backgroundVideo}
+        autoPlay
+        muted
+        loop
+        type="video/mp4"
+      />
       <div className={styles.formWrapper}>
         <img className={styles.otkLogo} src={otkLogo} alt="OTK Logo" />
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -93,8 +103,15 @@ export default function JoinRoom() {
             error={!!errors.username}
             helperText={errors.username?.message}
           />
-          {isErrorRoomNotFoundShown && <span className="error">Room not found</span>}
-          {isErrorUsernameTakenShown && <span className="error">Username is taken</span>}
+          <Snackbar
+            open={isSnackbarErrorShowed}
+            autoHideDuration={3000}
+            onClose={() => setIsSnackbarErrorShowed(false)}
+          >
+            <Alert variant="filled" severity="error" sx={{ width: "100%" }}>
+              {errorMessage}
+            </Alert>
+          </Snackbar>
           <button className={`btn ${styles.btnJoin}`} type="submit">
             JOIN
           </button>
