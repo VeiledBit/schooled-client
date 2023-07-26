@@ -12,7 +12,7 @@ import { styled } from "@mui/material/styles";
 import otkLogo from "../../media/OTK.webp";
 import backgroundVideo from "../../media/background.mp4";
 import { baseUrl } from "../../config/url";
-import "./home.css";
+import styles from "./Home.module.css";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -65,13 +65,13 @@ export default function Home() {
   });
 
   return (
-    <div className="fullSize">
-      <video className="background" src={backgroundVideo} autoPlay muted loop type="video/mp4" />
-      <div className="formWrapper">
-        <img className="otkLogo" src={otkLogo} alt="OTK Logo" />
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <div className={styles.fullSize}>
+      <video className={styles.background} src={backgroundVideo} autoPlay muted loop type="video/mp4" />
+      <div className={styles.formWrapper}>
+        <img className={styles.otkLogo} src={otkLogo} alt="OTK Logo" />
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <StyledTextField
-            className="inputUsername"
+            className={styles.inputUsername}
             type="text"
             name="username"
             variant="outlined"
@@ -103,16 +103,16 @@ export default function Home() {
                 )}
               />
             }
-            className="checkboxLabel"
+            className={styles.checkboxLabel}
             label="Are you participating?"
           />
-          <div className="captcha">
+          <div className={styles.captcha}>
             <HCaptcha
               sitekey="a0e25f29-e724-4ca8-bb36-826a7c1946ac"
               onVerify={(token) => handleCaptcha(token)}
             />
           </div>
-          <button className="btn btnCreate" type="submit">
+          <button className={`btn ${styles.btnCreate}`} type="submit">
             CREATE
           </button>
         </form>

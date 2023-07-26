@@ -1,0 +1,75 @@
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+}
+
+.formWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+}
+
+.otkLogo {
+  height: 350px;
+  width: 360px;
+  margin-bottom: 1em;
+  z-index: 1;
+}
+
+.inputUsername {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: center;
+  width: 210px;
+  z-index: 1;
+  min-height: 5em;
+}
+
+.checkboxLabel {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: center;
+  color: #ffffff;
+  z-index: 1;
+}
+
+.captcha {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: center;
+  margin-top: 20vh;
+  z-index: 2;
+}
+
+.btnCreate {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: center;
+  z-index: 1;
+}
+
+.btnJoin {
+  margin: auto;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: center;
+  z-index: 1;
+}

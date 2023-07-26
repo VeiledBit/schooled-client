@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./gradeButtons.css";
+import styles from "./GradeButtons.module.css";
 
 export default function GradeButtons(props) {
   const { value, incrementFails, decrementFails, disabled } = props;
@@ -10,7 +10,7 @@ export default function GradeButtons(props) {
         type="button"
         title="Increase F grade count"
         disabled={disabled}
-        className="btn btnFPlus div3"
+        className={`btn ${styles.btnFPlus} div3`}
         value={value}
         onClick={incrementFails}
       >
@@ -20,7 +20,7 @@ export default function GradeButtons(props) {
         type="button"
         title="Decrease F grade count"
         disabled={disabled}
-        className="btn btnFMinus div4"
+        className="btn div4"
         value={value}
         onClick={decrementFails}
       >

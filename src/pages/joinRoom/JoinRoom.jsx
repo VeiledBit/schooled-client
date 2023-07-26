@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import { baseUrl } from "../../config/url";
 import otkLogo from "../../media/OTK.webp";
 import backgroundVideo from "../../media/background.mp4";
-import "./joinRoom.css";
+import styles from "./JoinRoom.module.css";
 
 const qs = require("qs");
 
@@ -77,12 +77,12 @@ export default function JoinRoom() {
 
   return (
     <div>
-      <video className="background" src={backgroundVideo} autoPlay muted loop type="video/mp4" />
-      <div className="formWrapper">
-        <img className="otkLogo" src={otkLogo} alt="OTK Logo" />
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <video className={styles.background} src={backgroundVideo} autoPlay muted loop type="video/mp4" />
+      <div className={styles.formWrapper}>
+        <img className={styles.otkLogo} src={otkLogo} alt="OTK Logo" />
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <StyledTextField
-            className="inputUsername"
+            className={styles.inputUsername}
             type="text"
             name="username"
             variant="outlined"
@@ -95,7 +95,7 @@ export default function JoinRoom() {
           />
           {isErrorRoomNotFoundShown && <span className="error">Room not found</span>}
           {isErrorUsernameTakenShown && <span className="error">Username is taken</span>}
-          <button className="btn btnJoin" type="submit">
+          <button className={`btn ${styles.btnJoin}`} type="submit">
             JOIN
           </button>
         </form>
