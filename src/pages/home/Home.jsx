@@ -40,7 +40,6 @@ export default function Home() {
       isRoomMasterParticipating,
       captchaToken,
     };
-    console.log(baseUrl);
     try {
       await axios.post(`${baseUrl}/createRoom`, data).then((response) => {
         if (response.status === 200) {

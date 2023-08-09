@@ -56,7 +56,6 @@ export default function JoinRoom() {
         }
       });
     } catch (err) {
-      console.log(err);
       switch (err.response.status) {
         case 404:
           setErrorMessage("Room not found");

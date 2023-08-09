@@ -703,3 +703,17 @@ legend {
     width: 23%;
   }
 }
+
+.canvasGrade {
+  width: 40%;
+  height: 100%;
+  min-width: 30%;
+}
+
+.gradesContainerNew {
+  position: absolute;
+  top: 67%;
+  display: flex;
+  width: 5vw;
+  height: 3.3vh;
+}

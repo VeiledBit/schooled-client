@@ -1,17 +1,36 @@
-import React from "react";
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
+import React, { useEffect } from "react";
 import styles from "./GradeButtons.module.css";
+import ws from "../../socket/ws";
 
-export default function GradeButtons(props) {
-  const { value, incrementFails, decrementFails, disabled } = props;
+export default function GradeButtons({ user, setUsersArray }) {
+  const roomCode = sessionStorage.getItem("roomCode");
+  const incrementFails = (e) => {
+    const userId = e.target.value;
+    ws.emit("increment-fails", roomCode, userId);
+  };
+
+  const decrementFails = (e) => {
+    const userId = e.target.value;
+    ws.emit("decrement-fails", roomCode, userId);
+  };
+
+  useEffect(() => {
+    ws.on("confirm-increment", (data) => {
+      setUsersArray(data.users);
+    });
+
+    ws.on("confirm-decrement", (data) => {
+      setUsersArray(data.users);
+    });
+  }, []);
   return (
     <>
       <button
         type="button"
         title="Increase F grade count"
-        disabled={disabled}
         className={`btn ${styles.btnFPlus} div3`}
-        value={value}
+        value={user.userId}
         onClick={incrementFails}
       >
         +F
@@ -19,9 +38,8 @@ export default function GradeButtons(props) {
       <button
         type="button"
         title="Decrease F grade count"
-        disabled={disabled}
         className="btn div4"
-        value={value}
+        value={user.userId}
         onClick={decrementFails}
       >
         -F
@@ -29,14 +47,3 @@ export default function GradeButtons(props) {
     </>
   );
 }
-
-GradeButtons.propTypes = {
-  value: PropTypes.string.isRequired,
-  incrementFails: PropTypes.func.isRequired,
-  decrementFails: PropTypes.func.isRequired,
-  disabled: PropTypes.bool,
-};
-
-GradeButtons.defaultProps = {
-  disabled: null,
-};
