@@ -10,8 +10,8 @@ import { styled } from "@mui/material/styles";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { baseUrl } from "../../config/url";
-import otkLogo from "../../media/OTK.webp";
-import backgroundVideo from "../../media/background.mp4";
+import otkLogo from "../../assets/images/OTK.webp";
+import backgroundVideo from "../../assets/videos/background.mp4";
 import styles from "./JoinRoom.module.css";
 
 const qs = require("qs");

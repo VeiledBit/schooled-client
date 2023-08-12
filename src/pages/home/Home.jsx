@@ -9,8 +9,8 @@ import { useNavigate } from "react-router";
 import { Controller, useForm } from "react-hook-form";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import otkLogo from "../../media/OTK.webp";
-import backgroundVideo from "../../media/background.mp4";
+import otkLogo from "../../assets/images/OTK.webp";
+import backgroundVideo from "../../assets/videos/background.mp4";
 import { baseUrl } from "../../config/url";
 import styles from "./Home.module.css";
 

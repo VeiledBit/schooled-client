@@ -7,7 +7,7 @@ body {
 
 @font-face {
   font-family: nimbus-sans;
-  src: url(./media/NimbusSanL-Reg.otf);
+  src: url(./assets/fonts/NimbusSanL-Reg.otf);
   font-display: swap;
 }
 

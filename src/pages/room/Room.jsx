@@ -7,7 +7,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { SketchPicker } from "react-color";
 import Snackbar from "@mui/material/Snackbar";
 import ws from "../../socket/ws.js";
-import blackBoardImage from "../../media/blackboard.jpg";
+import blackBoardImage from "../../assets/images/blackboard.jpg";
 import GradeButtons from "../../components/GradeButtons/GradeButtons.jsx";
 import GradeImages from "../../components/GradeImages/GradeImages.jsx";
 import { baseUrl, inviteUrl } from "../../config/url";
