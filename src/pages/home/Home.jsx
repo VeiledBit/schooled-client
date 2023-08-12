@@ -112,7 +112,7 @@ export default function Home() {
             className={styles.checkboxLabel}
             label="Are you participating?"
           />
-          {process.env.NODE_ENV === "development" ? (
+          {process.env.REACT_APP_HCAPTCHA === "false" ? (
             <></>
           ) : (
             <div className={styles.captcha}>
